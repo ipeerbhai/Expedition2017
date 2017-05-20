@@ -5,8 +5,15 @@ const express = require('express');
 const app = express();
 var API = require('./API');
 
-app.use(express.static(__dirname + '/build')
-  .listen(3000, () => console.log('sever up on 3000')));
+app.use(express.static(__dirname + '/build'));
+
+// setup to listen and begin sering content.
+app.set('port', process.env.PORT || 3000);
+
+app.listen(app.get('port'), function () {
+    console.log('Express started on http://localhost:' + app.get('port') + '; Press CTRL-C to terminate.');
+});
+
 
 //---------------------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------------
