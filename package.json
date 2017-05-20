@@ -8,7 +8,8 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": ">3.4.7",
+    "express": "3.4.7",
+    "express3-handlebars": "^0.5.2",
     "jsonlines": "^0.1.0",
     "path": "^0.12.7",
     "serve-favicon": "^2.3.0"
