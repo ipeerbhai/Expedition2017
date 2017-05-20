@@ -72,8 +72,8 @@ xmls <- c(
 docs <- lapply(xmls, function(x) xmlTreeParse(x))
 #xmlRoot(doc)
 
+if(exists("DATA")) {rm("DATA")}
 # Gather all of articles' data
-rm("DATA")
 for(doc in docs) {
   src<-xpathApply(xmlRoot(doc), "//item")
   
