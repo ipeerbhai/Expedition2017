@@ -1,3 +1,97 @@
+setwd("~/Expedition2017/curationTool")
+
 #install.packages("XML") 
 library(XML)
-doc<-xmlTreeParse("http://s3.spotcrime.com/cache/rss/newark.xml")
+library(plyr)
+
+# Grab all NYTimes RSS feeds
+xmls <- c(
+'http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/World.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Africa.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Americas.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/AsiaPacific.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Europe.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/MiddleEast.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/US.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Education.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Politics.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Upshot.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/NYRegion.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/EnergyEnvironment.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/SmallBusiness.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Economy.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Dealbook.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/MediaandAdvertising.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/YourMoney.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/PersonalTech.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Sports.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Baseball.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/CollegeBasketball.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/CollegeFootball.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Golf.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Hockey.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/ProBasketball.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/ProFootball.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Soccer.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Tennis.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Science.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Environment.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Space.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Health.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Research.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Nutrition.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/HealthCarePolicy.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Views.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Arts.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/ArtandDesign.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Books.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/SundayBookReview.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Dance.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Movies.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Music.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Television.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Theater.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/FashionandStyle.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/DiningandWine.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/HomeandGarden.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Weddings.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/tmagazine.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Travel.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/JobMarket.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/RealEstate.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Commercial.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Automobiles.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/Obituaries.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/pop_top.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/MostShared.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/MostViewed.xml',
+'http://www.nytimes.com/services/xml/rss/nyt/sunday-review.xml')
+
+# Gather all docs from nytimes XML.
+docs <- lapply(xmls, function(x) xmlTreeParse(x))
+#xmlRoot(doc)
+
+# Gather all of articles' data
+rm("DATA")
+for(doc in docs) {
+  src<-xpathApply(xmlRoot(doc), "//item")
+  
+  for (i in 1:length(src)) {
+    if (!exists("DATA")) {
+      foo<-xmlSApply(src[[i]], xmlValue)
+      DATA<-data.frame(t(foo), stringsAsFactors=FALSE)
+    }
+    else {
+      foo<-xmlSApply(src[[i]], xmlValue)
+      tmp<-data.frame(t(foo), stringsAsFactors=FALSE)
+      DATA<-rbind.fill(DATA, tmp)
+    }
+  }
+}
+
+# Save all articles
+write.csv(DATA, '../data/articles.csv')
+
+
+
