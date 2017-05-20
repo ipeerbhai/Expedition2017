@@ -1,11 +1,16 @@
 {
   "name": "foureyesonly",
   "version": "1.0.0",
-  "description": "",
+  "description": "The Expedition HackAThon Controller.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
+  },
+  "dependencies": {
+    "jsonlines": "^0.1.0",
+    "path": "^0.12.7",
+    "serve-favicon": "^2.3.0"
   },
   "repository": {
     "type": "git",
