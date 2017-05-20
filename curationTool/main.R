@@ -90,8 +90,12 @@ for(doc in docs) {
   }
 }
 
+for(i in names(DATA)) {
+  print(i)
+  DATA[[i]][which(sapply(DATA[[i]], function(x) {length(x) == 0}))] <- '#NA'
+  DATA[[i]] <- unlist(DATA[[i]])
+}
 # Save all articles
-write.csv(DATA, '../data/articles.csv')
-
+write.csv(as.data.frame(DATA), '../data/articles.csv')
 
 
