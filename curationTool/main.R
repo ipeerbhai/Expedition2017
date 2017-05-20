@@ -95,6 +95,13 @@ for(i in names(DATA)) {
   DATA[[i]][which(sapply(DATA[[i]], function(x) {length(x) == 0}))] <- '#NA'
   DATA[[i]] <- unlist(DATA[[i]])
 }
+
+DATA$articleURL <- NA
+for(i in 1:nrow(DATA)) {
+  pos <- regexpr('\\?', DATA$link)
+  DATA$articleURL <- substr(DATA$link, 0, pos-1)
+} 
+
 # Save all articles
 write.csv(as.data.frame(DATA), '../data/articles.csv')
 
