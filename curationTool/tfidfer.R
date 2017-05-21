@@ -6,18 +6,17 @@ if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
 }
 
 library(dplyr)
-library(janeaustenr)
-library(tidytext)
-library(stringr)
-library(plyr)
-library(dplyr)
-library(magrittr)
+#library(janeaustenr)
+#library(tidytext)
+#library(stringr)
+#library(plyr)
+#library(magrittr)
 library(tm)
 library(proxy)
-library(ggplot2)
-library(RColorBrewer)
-library(wordcloud)
-library(SnowballC)
+#library(ggplot2)
+#library(RColorBrewer)
+#library(wordcloud)
+#library(SnowballC)
 set.seed(1300)
 
 # Get command line args
@@ -153,17 +152,17 @@ for (i in 1:(nrow(df_clust_cuts) - 1)) {
   df_clust_cuts[df_clust_cuts$cut_level == i, 'avg_dist'] <- mean(df_dist$cos_dist)
 }
 
-ggplot(data = df_clust_cuts, aes(x = cut_level, y = avg_dist)) +
-  geom_line(color = 'steelblue', size = 2) +
-  labs(title = 'Cosine Distance of Hierarchical Clusters by Tree Cut',
-       x = 'Tree Cut Level / Number of Final Clusters',
-       y = 'Intra-Cluster Mean Cosine Distance')
+#ggplot(data = df_clust_cuts, aes(x = cut_level, y = avg_dist)) +
+#  geom_line(color = 'steelblue', size = 2) +
+#  labs(title = 'Cosine Distance of Hierarchical Clusters by Tree Cut',
+#       x = 'Tree Cut Level / Number of Final Clusters',
+#       y = 'Intra-Cluster Mean Cosine Distance')
 
-ggplot(data = df_clust_cuts, aes(x = avg_size, y = avg_dist, color = cut_level)) +
-  geom_point(size = 4) +
-  labs(title = 'Mean Cluster Size & Cosine Distance by Tree Cut',
-       x = 'Mean Number of Documents per Cluster',
-       y = 'Intra-Cluster Mean Cosine Distance')
+#ggplot(data = df_clust_cuts, aes(x = avg_size, y = avg_dist, color = cut_level)) +
+#  geom_point(size = 4) +
+#  labs(title = 'Mean Cluster Size & Cosine Distance by Tree Cut',
+#       x = 'Mean Number of Documents per Cluster',
+#       y = 'Intra-Cluster Mean Cosine Distance')
 
 tf_idf_norm <- tf_idf_mat / apply(tf_idf_mat, MARGIN = 1, FUN = function(x) sum(x^2)^0.5)
 km_clust <- kmeans(x = tf_idf_norm, centers = nClusters, iter.max = 25)
