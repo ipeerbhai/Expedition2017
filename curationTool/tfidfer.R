@@ -2,7 +2,7 @@
 
 packages <- c("dplyr","janeaustenr","tidytext","stringr","plyr","dplyr","magrittr","tm","proxy","ggplot2","RColorBrewer","wordcloud","SnowballC")
 if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
-  install.packages(setdiff(packages, rownames(installed.packages())))  
+  install.packages(setdiff(packages, rownames(installed.packages())), repos="http://cran.rstudio.com/")  
 }
 
 library(dplyr)
@@ -24,8 +24,8 @@ set.seed(1300)
 args = commandArgs(trailingOnly=TRUE)
 
 # TF-IDF
+setwd(paste(getwd(),"/../"))
 
-setwd("~/Expedition/expedition/Expedition2017")
 NYTData <- read.csv("data/NYTimesArticles.csv", stringsAsFactors=FALSE)
 names(NYTData)[1] <- 'articleNum'
 
