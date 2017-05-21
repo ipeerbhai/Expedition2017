@@ -90,22 +90,26 @@ var SummarizeText = function (req, res) {
 //---------------------------------------------------------------------------------------------------------------------------
 var Search = function (req, res) {
     var outFile = os.tmpdir() + path.sep + "search.txt";
-//  var SearchEXE = "python C:\\Users\\soth02\\Documents\\Expedition\\expedition\\Expedition2017\\summarize\\read_from_txt.py";
-    var SearchEXE = "python C:\\Users\\soth02\\Documents\\Expedition\\expedition\\Expedition2017\\summarize\\hello.py";
     var _keywords = req.body.keywords;
     var _articleCount = req.body.numOfArt;
+    var RscriptEXE = "RScript /Users/danielrb/Expedition2017/curationTool/tfidfer.R " + _articleCount + " " + _keywords;
+    var RscriptOut = execSync(RscriptEXE);
+//    console.log(RscriptOut);
 
-    // build the JSON
-    var InterChange = {
-        keywords: _keywords,
-        articleCount: _articleCount
-    };
+    var summarizeEXE = "python3 summarize/hello.py " + RscriptOut;
+    var output = execSync(summarizeEXE);
+//    console.log(output);
+
+//    // build the JSON
+//    var InterChange = {
+//        keywords: _keywords,
+//        articleCount: _articleCount
+//    };
 
     // save it
-    SaveJSONFile(outFile, InterChange, false);
+//    SaveJSONFile(outFile, InterChange, false);
 
     // Exec the C# console program that actually reads and searches.
-    var output = execSync(SearchEXE);
     res.render('home', {
         MAINCONTENT: output
     });
@@ -116,4 +120,4 @@ var Search = function (req, res) {
 //---------------------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------------
 module.exports.SummarizeText = SummarizeText;
-// module.exports.Search = Search;
+module.exports.Search = Search;

@@ -37,7 +37,7 @@ keywords <- tolower(args[-1])
 #setwd(paste(getwd(),"/../"))
 
 
-setwd("~/Expedition2017")
+setwd("/Users/danielrb/Expedition2017")
 #setwd("~/Expedition/expedition/Expedition2017")
 
 NYTData <- read.csv("data/NYTimesArticles.csv", stringsAsFactors=FALSE)
@@ -90,23 +90,21 @@ df_clust_cuts <- data_frame(cut_level = 1:length(articles$articleNum),
                             avg_size = 0,
                             avg_dist = 0)
 
-findFreqTerms(doc_term, 100)
-findAssocs(doc_term, "obama", .60)
+#findFreqTerms(doc_term, 100)
+#findAssocs(doc_term, "obama", .60)
 
 
 dtm.matrix = as.matrix(doc_term)
 m  <- as.matrix(doc_term)
 distMatrix <- dist(t(m), method="euclidean")
 groups <- hclust(distMatrix,method="ward.D")
-plot(groups, cex=0.9, hang=-1)
-rect.hclust(groups, k=4)
+#plot(groups, cex=0.9, hang=-1)
+#rect.hclust(groups, k=4)
 
 
 for(i in groups) {
-  print(i)
+#  print(i)
 }
-
-
 
 
 
@@ -177,7 +175,8 @@ returnVal =
          ']'
   )
 
-returnVal
+cat(returnVal)
+q()
 
 # THE FOLLOWING BREAKS ARTICLES INTO PCA REPRESENTATIONS AND DRAWS THE TWO
 #pca_comp <- prcomp(tf_idf_norm)
