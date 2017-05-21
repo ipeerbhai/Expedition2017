@@ -26,13 +26,19 @@ masterArticleURLs = []
 for articleGroup in articleList:
   concatedArticles = ''
   concatedURLs = ''
+  image = ''
+  urlCount = 1
   for article in articleGroup:
     concatedArticles = concatedArticles + df['text'][article-1]
-    tempURL = df['url'][article-1]
-    concatedURLs = concatedURLs + '<a href="' + tempURL + '">' + tempURL + '</a>' + '<br />'
+    tempURL = df['url'][article-1].strip()
+    concatedURLs = concatedURLs + '<li><a href="' + tempURL + '">' + tempURL + '</a>' + '</li>'
+#    concatedURLs = concatedURLs + '<a href="' + tempURL + '">' + str(urlCount) + ": " + tempURL + '</a>' + '<br />'
+    urlCount = urlCount + 1
+    if (df['top_image'][article-1] != ''):
+      image = df['top_image'][article-1]
   masterArticles.append(concatedArticles)
   masterTitles.append(df['summary'][articleGroup[0]-1])
-  masterImages.append(df['top_image'][articleGroup[0]-1])
+  masterImages.append(image)
   masterArticleURLs.append(concatedURLs)
 
 print('<section class="articleList">')
@@ -50,10 +56,12 @@ for i in range(0, len(masterArticles)):
   print("<br/>")
   print('Summary:')
   print("<br/>")
-  print(summarize(art, word_count=200).replace('\n', '<br />'))
+  print(summarize(art, word_count=150).replace('\n', '<br /><br />'))
   print("<br/>")
   print("<br/>")
+  print('<ol>')
   print(masterArticleURLs[i])
+  print('</ol>')
   print('</article>')
 
 print('</section>')

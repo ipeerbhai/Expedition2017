@@ -59,8 +59,8 @@ if(nrow(andArticles) > 10) {
   articles <- orArticles
 }
 
-if(nrow(articles) > 30) {
-  articles <- tail(articles, 30)
+if(nrow(articles) > 20) {
+  articles <- tail(articles, 20)
 }
   
 corpus <- Corpus(VectorSource(articles$text)) %>%
@@ -79,9 +79,9 @@ tf_idf_dist <- dist(t(tf_idf_mat), method = 'cosine')
 
 
 clust_h <- hclust(d = t(tf_idf_dist), method = 'ward.D2')
-plot(clust_h,
-     main = 'Cluster Dendrogram: Ward Cosine Distance',
-     xlab = '', ylab = '', sub = '')
+#plot(clust_h,
+#     main = 'Cluster Dendrogram: Ward Cosine Distance',
+#     xlab = '', ylab = '', sub = '')
 
 dist_mat <- as.matrix(tf_idf_dist)
 
