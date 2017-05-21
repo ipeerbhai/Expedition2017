@@ -8,11 +8,30 @@ const fs = require('fs');
 const path = require('path');
 var jsonlines = require('jsonlines');
 var parser = jsonlines.parse();
+const execSync = require('child_process').execSync;
 //---------------------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------------
 // Private functions
 //---------------------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------------------------------------------------------
+function SaveJSONFile(File, JSONData, ShouldAppend = true) {
+    if (fs.existsSync(File)) {
+        if (!ShouldAppend) {
+            fs.unlinkSync(File);
+        }
+    }
+
+    fs.appendFile(File, JSON.stringify(JSONData), function (err) {
+        if (err)
+            console.log(err);
+    });
+    fs.appendFile(File, '\n', function (err) {
+        if (err)
+            console.log(err);
+    });
+}
 
 //---------------------------------------------------------------------------------------------------------------------------
 // Authorize checks that the API call is properly allowed to use this API.
@@ -53,6 +72,9 @@ var SummarizeText = function (req, res) {
         return;
     }
 
+    var execSync = require('exec-sync');   
+    var clusterOut = execSync('Rscript curationTool/tfidfer.R');
+
     var _Message = req.body.Message;
 
     // Run Gensim and get a result
@@ -63,11 +85,34 @@ var SummarizeText = function (req, res) {
     // res.write(GensimSumary);
     res.status = 200;
     res.send();
-}
+};
 
+//---------------------------------------------------------------------------------------------------------------------------
+var Search = function (req, res) {
+    var outFile = os.tmpdir() + path.sep + "search.txt";
+    var SearchEXE = "C:\\Github\\Expedition2017\\SmartScoreSystem\\SmartScoreSystem\\bin\\Debug\\SmartScoreSystem.exe";
+    var _keywords = req.body.keywords;
+    var _articleCount = req.body.numOfArt;
+
+    // build the JSON
+    var InterChange = {
+        keywords: _keywords,
+        articleCount: _articleCount
+    };
+
+    // save it
+    SaveJSONFile(outFile, InterChange, false);
+
+    // Exec the C# console program that actually reads and searches.
+    var output = execSync(SearchEXE);
+    res.render('home', {
+        MAINCONTENT: output
+    });
+};
 //---------------------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------------
 // Exports
 //---------------------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------------
 module.exports.SummarizeText = SummarizeText;
+module.exports.Search = Search;
