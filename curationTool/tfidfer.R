@@ -22,19 +22,51 @@ set.seed(1300)
 
 # Get command line args
 args = commandArgs(trailingOnly=TRUE)
+if(identical(args, character(0))) {
+  print("Please supply a number number of clusters and then keywords, separated by spaces.")
+  print("e.g. Rscript curationTool/tfidfer.R 5 obama trump")
+  return
+}
+nClusters <- args[1]
+keywords <- tolower(args[-1])
 
+#print("nClusters:")
+#print(nClusters)
+#print('Keywords:')
+#keywords
 # TF-IDF
 setwd(paste(getwd(),"/../"))
 
+<<<<<<< HEAD
+=======
+
+#setwd("~/Expedition2017")
+setwd("~/Expedition/expedition/Expedition2017")
+>>>>>>> 45c7ff87074a9a57c2528117857f5674f04d159f
 NYTData <- read.csv("data/NYTimesArticles.csv", stringsAsFactors=FALSE)
 names(NYTData)[1] <- 'articleNum'
+#Sort by publish date
+NYTData <- NYTData[order(NYTData$publish_date),]
 
 # Remove duplicate articles based on URL
 NYTData <- NYTData[match(unique(NYTData$url), NYTData$url),]
 
-keyword <- 'obama'
-articles <- NYTData[grepl(keyword, NYTData$keywords),]
+orKeywords <- paste(keywords, collapse='|')
+andKeywords <- paste(keywords, collapse='&')
 
+orArticles <- NYTData[grepl(orKeywords, NYTData$keywords),]
+andArticles <- NYTData[grepl(andKeywords, NYTData$keywords),]
+
+if(nrow(andArticles) > 10) {
+  articles <- andArticles
+} else {
+  articles <- orArticles
+}
+
+if(nrow(articles) > 30) {
+  articles <- tail(articles, 30)
+}
+  
 corpus <- Corpus(VectorSource(articles$text)) %>%
 #  tm_map(x = ., FUN = PlainTextDocument) #%>%
   tm_map(x = ., FUN = removePunctuation) %>%
@@ -136,7 +168,6 @@ ggplot(data = df_clust_cuts, aes(x = avg_size, y = avg_dist, color = cut_level))
        y = 'Intra-Cluster Mean Cosine Distance')
 
 tf_idf_norm <- tf_idf_mat / apply(tf_idf_mat, MARGIN = 1, FUN = function(x) sum(x^2)^0.5)
-nClusters <- 5
 km_clust <- kmeans(x = tf_idf_norm, centers = nClusters, iter.max = 25)
 
 returnVal = 
