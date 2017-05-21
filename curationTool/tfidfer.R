@@ -20,6 +20,9 @@ library(wordcloud)
 library(SnowballC)
 set.seed(1300)
 
+# Get command line args
+args = commandArgs(trailingOnly=TRUE)
+
 # TF-IDF
 
 setwd("~/Expedition/expedition/Expedition2017")
