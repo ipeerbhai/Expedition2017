@@ -30,8 +30,9 @@ for articleGroup in articleList:
   urlCount = 1
   for article in articleGroup:
     concatedArticles = concatedArticles + df['text'][article-1]
-    tempURL = df['url'][article-1]
-    concatedURLs = concatedURLs + '<a href="' + tempURL + '">' + str(urlCount) + ": " + tempURL + '</a>' + '<br />'
+    tempURL = df['url'][article-1].strip()
+    concatedURLs = concatedURLs + '<li><a href="' + tempURL + '">' + tempURL + '</a>' + '</li>'
+#    concatedURLs = concatedURLs + '<a href="' + tempURL + '">' + str(urlCount) + ": " + tempURL + '</a>' + '<br />'
     urlCount = urlCount + 1
     if (df['top_image'][article-1] != ''):
       image = df['top_image'][article-1]
@@ -58,7 +59,9 @@ for i in range(0, len(masterArticles)):
   print(summarize(art, word_count=150).replace('\n', '<br /><br />'))
   print("<br/>")
   print("<br/>")
+  print('<ol>')
   print(masterArticleURLs[i])
+  print('</ol>')
   print('</article>')
 
 print('</section>')
