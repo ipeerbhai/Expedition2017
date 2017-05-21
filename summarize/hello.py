@@ -34,14 +34,16 @@ print('<section class="articleList">')
 #for art in masterArticles:
 for i in range(0, len(masterArticles)):
   art = masterArticles[i]
-  headline = masterTitles[i]
+  headline = masterTitles[i][0:100]
   print('<article class="article">')
   print("<br/>")
   print("<p style=\"font-size:20px\"><strong>")
   print(headline)
   print("</strong></p")
+  print('<img href="' + str('https://www.w3schools.com/html/pic_mountain.jpg') + '" style="width:304px;height:228px;">')
   print("<br/>")
   print('Summary:')
+  print("<br/>")
   print(summarize(art, ratio=0.1))
   print("<br/>")
   print("<br/>")
