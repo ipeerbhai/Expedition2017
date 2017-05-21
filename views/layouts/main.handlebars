@@ -15,56 +15,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--CSS-->
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="http://dev.thinkpredict.com:3000/assets/css/app.css" />
+    <link rel="stylesheet" href="/assets/css/style.css"  />
     <!-- Google fonts-->
     <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic" rel="stylesheet"
         type="text/css" />
-    <style>
-        .video-responsive {
-            overflow: hidden;
-            padding-bottom: 56.25%;
-            position: relative;
-            height: 0;
-        }
-        
-        .video-responsive iframe {
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 100%;
-            position: absolute;
-        }
-    </style>
-
-    <!--Google analytics -->
     <title>FourEyes</title>
+    <script id="article-template" type="text/x-handlebars-template">
+      <section>
+        <article class="searchBar">
+          <input type="text" name="keywords" placeholder="keywords">
+          <input type="text" name="numOfArt" placeholder="1">
+          <input type="submit" value="submit">
+        </article>
+        <article>
+          {{{body}}}
+        </article>
+      </section>
+    </script>
+    <script id="description-template" type="text/x-handlebars-template">
+      <h3>Description</h3>
+      {{{body}}}
+    </script>
 </head>
 
 <body>
-    {{> navigation}}
+  <h1>FourEyes</h1>
+    <article class="searchBar">
+      <input type="text" name="keywords" placeholder="keywords">
+      <input type="text" name="numOfArt" placeholder="1">
+      <input id="keySubmit" type="submit" value="submit">
+    </article>
     {{{body}}}
-    <!-- Footer-->
-    <footer id="footer">
-        <div class="wrap">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-4 col-sm-4 i">
-                        <h2>BLAH</h2>
-                        <div class="content">+1 (206) 555-1212<br><a href="#" title="#">no-one@blah.com</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Copyright-->
-        <div class="copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-6 i">Copyright &copy; 2017 <a title="ThinkPredict">Team FourEyes</a></div>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <!-- JS-->
     <script src="/assets/js/jquery-1.11.2.min.js"></script>
@@ -76,84 +57,27 @@
     <script src="/assets/js/waypoints.min.js"></script>
     <script src="/assets/js/jquery.countTo.js"></script>
     <script src="/assets/js/app.min.js"></script>
-    <script src="//dptha8f98z1d5.cloudfront.net/plugins/toastr/toastr.min.js"></script>
     <script type="text/javascript">
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "progressBar": true,
-            "onclick": null,
-            "showDuration": "400",
-            "hideDuration": "600",
-            "timeOut": "7000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
 
-        function getUrlParams() {
-            var match,
-                pl = /\+/g,  // Regex for replacing addition symbol with a space
-                search = /([^&=]+)=?([^&]*)/g,
-                decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-                query = window.location.search.substring(1);
+    var articles = [];
 
-            var urlParams = {};
-            while (match = search.exec(query)) {
-                if (!urlParams[decode(match[1])]) {
-                    urlParams[decode(match[1])] = decode(match[2]);
-                } else {
-                    urlParams[decode(match[1])] += "," + decode(match[2]);
-                }
-            }
-            urlParams.hash = window.location.hash;
-            return urlParams;
-        };
+
 
         $(document).ready(function () {
 
-            $("#btnSubscribe").click(function (e) {
-
+            $("#keySubmit").click(function (e) {
                 e.preventDefault();
-                e.stopPropagation();
-
-                var email_regex = /^[a-zA-Z0-9._-]+@([a-zA-Z0-9.-]+\.)+[a-zA-Z0-9.-]{2,4}$/;
-                var name = $('#inputEmail').val().trim();
-                if (!name || !name.match(email_regex)) {
-                    toastr.warning("Not a valid email address. Please correct your input!");
-                    return false;
-                }
 
                 $.ajax({
-                    url: "/v1/subscribe-tp-news",
-                    type: 'POST',
-                    crossDomain: false,
-                    data: JSON.stringify({
-                        email: name
-                    }),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function () {
-                        $('#inputEmail').val("");
-                    },
-                    complete: function () {
-                        toastr.success("Thank you for your interest.");
-                    }
-                });
-            });
-
-            var urlParams = getUrlParams();
-            if (urlParams.unsub === "true") {
-                toastr.success("You have successfully unsubscribed from updates from this channel. ")
-                if (history.pushState) {
-                    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-                    window.history.pushState({ path: newurl }, '', newurl);
+                  url: URl,
+                  datatype: "jsonp",
+                  success: function(data, status, xhr) {
+                    console.log(data);
+                  }
                 }
-            }
-        });
-
+                );
+            });
+            
     </script>
 
 </body>
