@@ -68,27 +68,16 @@
             $("#keySubmit").click(function (e) {
                 e.preventDefault();
 
-                $.get('/api', {
-                  summary: summary,
-                  keywords: keywords,
-                  url: url
-                }).done(function(data) {
-                  var article = JSON.parse(data);
-                  articles.push(article);
-                })
-                });
-            });
-
-            var urlParams = getUrlParams();
-            if (urlParams.unsub === "true") {
-                toastr.success("You have successfully unsubscribed from updates from this channel. ")
-                if (history.pushState) {
-                    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-                    window.history.pushState({ path: newurl }, '', newurl);
+                $.ajax({
+                  url: URl,
+                  datatype: "jsonp",
+                  success: function(data, status, xhr) {
+                    console.log(data);
+                  }
                 }
-            }
-        });
-
+                );
+            });
+            
     </script>
 
 </body>
