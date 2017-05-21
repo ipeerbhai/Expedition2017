@@ -35,11 +35,11 @@ keywords <- tolower(args[-1])
 #print('Keywords:')
 #keywords
 # TF-IDF
-setwd(paste(getwd(),"/../"))
+#setwd(paste(getwd(),"/../"))
 
 
-#setwd("~/Expedition2017")
-setwd("~/Expedition/expedition/Expedition2017")
+setwd("~/Expedition2017")
+#setwd("~/Expedition/expedition/Expedition2017")
 
 NYTData <- read.csv("data/NYTimesArticles.csv", stringsAsFactors=FALSE)
 names(NYTData)[1] <- 'articleNum'
