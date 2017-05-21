@@ -28,31 +28,11 @@
   </header>
   <form action="/v1/Search" method="POST" style="padding:10px">
     <input class="keywordInput" type="text" name="keywords" placeholder="keywords">
-    <input class="numInput" type="text" name="numOfArt" placeholder="1">
-    <input type="text" id="datepicker" placeholder="date(optional)">
+    <input class="numInput" type="text" name="numOfArt">
     <input id="keySubmit" type="submit" value="submit">
   </form>
   {{{body}}}
   <!-- JS-->
-  <script type="text/javascript">
-  $(function() {
-    $("#datepicker").datepicker({
-      showOtherMonths: true,
-      selectOtherMonths: true,
-    });
-  });
-
-  document.getElementById('keySumbit').addEventListener("click", function keySubmit() {
-    event.preventDefault();
-    var numInput = document.getElementByClassName('numInput').value;
-    if (!numInput) {
-      alert("please add a number of articles");
-    } else {
-      continue;
-    }
-    return false;
-  });
-  </script>
   <script src="/assets/js/jquery-1.11.2.min.js"></script>
   <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="/assets/js/owl.carousel.min.js"></script>
