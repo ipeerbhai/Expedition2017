@@ -18,26 +18,33 @@ print(articleList)
 
 df = pandas.read_csv('/Users/danielrb/Expedition2017/data/NYTimesArticles.csv')
 
+
 masterArticles = []
+masterTitles = []
 for articleGroup in articleList:
   concatedArticles = ''
   for article in articleGroup:
     concatedArticles = concatedArticles + df['text'][article-1]
   masterArticles.append(concatedArticles)
+  masterTitles.append(df['summary'][articleGroup[0]-1])
 
 
+print('<section class="articleList">')
 
-
-text = []
-
-for art in masterArticles:
-  print('Summary:')
+#for art in masterArticles:
+for i in range(0, len(masterArticles)):
+  art = masterArticles[i]
+  headline = masterTitles[i]
+  print('<article class="article">')
   print("<br/>")
   print("<p style=\"font-size:20px\"><strong>")
-  print("Woooo")
+  print(headline)
   print("</strong></p")
   print("<br/>")
+  print('Summary:')
   print(summarize(art, ratio=0.1))
   print("<br/>")
   print("<br/>")
+  print('</article>')
 
+print('</section>')
