@@ -68,7 +68,7 @@ function Authorize(req, res) {
 //  Input a string to this function, get back an automatic summarization.
 var SummarizeText = function (req, res) {
     var AuthToken = Authorize(req, res);
-    if (!AuthToken.IsAuthroized) {
+    if (!AuthToken.IsAuthorized) {
         return;
     }
 
@@ -90,7 +90,8 @@ var SummarizeText = function (req, res) {
 //---------------------------------------------------------------------------------------------------------------------------
 var Search = function (req, res) {
     var outFile = os.tmpdir() + path.sep + "search.txt";
-    var SearchEXE = "C:\\Github\\Expedition2017\\SmartScoreSystem\\SmartScoreSystem\\bin\\Debug\\SmartScoreSystem.exe";
+//  var SearchEXE = "python C:\\Users\\soth02\\Documents\\Expedition\\expedition\\Expedition2017\\summarize\\read_from_txt.py";
+    var SearchEXE = "python C:\\Users\\soth02\\Documents\\Expedition\\expedition\\Expedition2017\\summarize\\hello.py";
     var _keywords = req.body.keywords;
     var _articleCount = req.body.numOfArt;
 
