@@ -36,7 +36,9 @@ keywords <- tolower(args[-1])
 #keywords
 # TF-IDF
 
-setwd("~/Expedition2017")
+
+#setwd("~/Expedition2017")
+setwd("~/Expedition/expedition/Expedition2017")
 NYTData <- read.csv("data/NYTimesArticles.csv", stringsAsFactors=FALSE)
 names(NYTData)[1] <- 'articleNum'
 #Sort by publish date
