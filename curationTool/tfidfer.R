@@ -1,4 +1,4 @@
-setwd("~/Expedition2017/curationTool")
+#setwd("~/Expedition2017/curationTool")
 
 library(dplyr)
 library(janeaustenr)
