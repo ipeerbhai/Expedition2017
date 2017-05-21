@@ -22,3 +22,9 @@
 .keywordInput {
   width: 500px;
 }
+
+.article {
+text-align: justify;
+margin: 0 auto;
+width: 70%;
+}
