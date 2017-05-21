@@ -1,18 +1,19 @@
 #setwd("~/Expedition2017/curationTool")
+options(warn = -1)
 
 packages <- c("dplyr","janeaustenr","tidytext","stringr","plyr","dplyr","magrittr","tm","proxy","ggplot2","RColorBrewer","wordcloud","SnowballC")
 if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
   install.packages(setdiff(packages, rownames(installed.packages())), repos="http://cran.rstudio.com/")  
 }
 
-library(dplyr)
+library(dplyr, warn.conflicts = FALSE)
 #library(janeaustenr)
 #library(tidytext)
 #library(stringr)
 #library(plyr)
 #library(magrittr)
-library(tm)
-library(proxy)
+library(tm, warn.conflicts = FALSE)
+library(proxy, warn.conflicts = FALSE)
 #library(ggplot2)
 #library(RColorBrewer)
 #library(wordcloud)
@@ -34,10 +35,8 @@ keywords <- tolower(args[-1])
 #print('Keywords:')
 #keywords
 # TF-IDF
-#setwd(paste(getwd(),"/../"))
 
-
-setwd("/Users/danielrb/Expedition2017")
+#setwd("/Users/danielrb/Expedition2017")
 #setwd("~/Expedition/expedition/Expedition2017")
 
 NYTData <- read.csv("data/NYTimesArticles.csv", stringsAsFactors=FALSE)

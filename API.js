@@ -92,11 +92,13 @@ var Search = function (req, res) {
     var outFile = os.tmpdir() + path.sep + "search.txt";
     var _keywords = req.body.keywords;
     var _articleCount = req.body.numOfArt;
-    var RscriptEXE = "RScript /Users/danielrb/Expedition2017/curationTool/tfidfer.R " + _articleCount + " " + _keywords;
+    var RscriptEXE = "RScript curationTool" + path.sep + "tfidfer.R " + _articleCount + " " + _keywords;
     var RscriptOut = execSync(RscriptEXE);
-//    console.log(RscriptOut);
+    console.log(RscriptOut);
 
-    var summarizeEXE = "python3 summarize/hello.py " + RscriptOut;
+    var summarizeEXE = "python summarize/hello.py " + RscriptOut;
+    var output = summarizeEXE;
+
     var output = execSync(summarizeEXE);
 //    console.log(output);
 
