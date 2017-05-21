@@ -26,13 +26,16 @@ masterArticleURLs = []
 for articleGroup in articleList:
   concatedArticles = ''
   concatedURLs = ''
+  image = ''
   for article in articleGroup:
     concatedArticles = concatedArticles + df['text'][article-1]
     tempURL = df['url'][article-1]
     concatedURLs = concatedURLs + '<a href="' + tempURL + '">' + tempURL + '</a>' + '<br />'
+    if (df['top_image'][article-1] != ''):
+      image = df['top_image'][article-1]
   masterArticles.append(concatedArticles)
   masterTitles.append(df['summary'][articleGroup[0]-1])
-  masterImages.append(df['top_image'][articleGroup[0]-1])
+  masterImages.append(image)
   masterArticleURLs.append(concatedURLs)
 
 print('<section class="articleList">')
