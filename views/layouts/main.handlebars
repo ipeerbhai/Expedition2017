@@ -14,8 +14,8 @@
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--CSS-->
+    <link rel="stylesheet" href="/assets/style.css">
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/assets/css/style.css"  />
     <!-- Google fonts-->
     <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic" rel="stylesheet"
         type="text/css" />
@@ -39,10 +39,12 @@
 </head>
 
 <body>
-  <h1>FourEyes</h1>
+  <header class="logoHeader">
+    <img class="logo" src="../img/foureyesonly.png" alt="logo">
+  </header>
     <article class="searchBar">
-      <input type="text" name="keywords" placeholder="keywords">
-      <input type="text" name="numOfArt" placeholder="1">
+      <input class="keywordInput" type="text" name="keywords" placeholder="keywords">
+      <input class="numInput" type="text" name="numOfArt" placeholder="1">
       <input id="keySubmit" type="submit" value="submit">
     </article>
     {{{body}}}
@@ -74,10 +76,10 @@
                   success: function(data, status, xhr) {
                     console.log(data);
                   }
-                }
-                );
+                });
+              });
             });
-            
+
     </script>
 
 </body>
