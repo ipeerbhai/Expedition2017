@@ -57,27 +57,13 @@ app.post('/v1/SummarizeText', function (req, res) {
 //---------------------------------------------------------------------------------------------------------------------------
 
 // template a landing markup
-var HeaderBaseMarkup = `style="background-image: url({{BGURL}});background-attachment:scroll;{{BGSIZEPOS}};background-repeat: no-repeat;"
- data-center="background-position: 50% {{DATACENTER}};" 
- data-bottom-top="background-position: 50% 400px;" 
- data-top-bottom="background-position: 50% -400px;" 
- class="{{BGCLASS}}"`;
-var MouseMarkup = '<div class="mouse"></div>';
+
 
 
 app.get('/', function (req, res) {
-  var DesiredImage = '/img/trend.jpg';
-  var VisibleTitle = 'woof!';
-  var _header = HeaderBaseMarkup.replace(/{{BGURL}}/, DesiredImage);
-  _header = _header.replace(/{{BGSIZEPOS}}/, '');
-  _header = _header.replace(/{{DATACENTER}}/, '0px');
-  _header = _header.replace(/{{BGCLASS}}/, 'image fullscreen dim');
 
 
   res.render('home', {
-    HEADERMARKUP: _header,
-    BGTEXT: VisibleTitle,
-    BGMOUSEDIV: MouseMarkup
   });
 
 });
