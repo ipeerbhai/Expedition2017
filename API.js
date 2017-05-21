@@ -53,6 +53,9 @@ var SummarizeText = function (req, res) {
         return;
     }
 
+    var execSync = require('exec-sync');   
+    var clusterOut = execSync('Rscript curationTool/tfidfer.R');
+
     var _Message = req.body.Message;
 
     // Run Gensim and get a result
