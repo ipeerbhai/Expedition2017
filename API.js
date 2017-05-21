@@ -46,7 +46,7 @@ function Authorize(req, res) {
     else {
         // we are not authorized.  Send a forbidden code (403)
         res.status = 403;
-        res.send(); // this will end the session, and 
+        res.send(); // this will end the session, and
     }
 
     // Check authorized client.  If not, close out the tunnel.
@@ -72,7 +72,7 @@ var SummarizeText = function (req, res) {
         return;
     }
 
-    var execSync = require('exec-sync');   
+    var execSync = require('exec-sync');
     var clusterOut = execSync('Rscript curationTool/tfidfer.R');
 
     var _Message = req.body.Message;
@@ -110,10 +110,10 @@ var Search = function (req, res) {
         MAINCONTENT: output
     });
 };
-//---------------------------------------------------------------------------------------------------------------------------
+// //---------------------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------------
 // Exports
 //---------------------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------------------
 module.exports.SummarizeText = SummarizeText;
-module.exports.Search = Search;
+// module.exports.Search = Search;
