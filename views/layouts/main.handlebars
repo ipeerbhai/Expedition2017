@@ -34,12 +34,23 @@
   </form>
   {{{body}}}
   <!-- JS-->
-  <script type="javascript">
+  <script type="text/javascript">
   $(function() {
     $("#datepicker").datepicker({
       showOtherMonths: true,
       selectOtherMonths: true,
     });
+  });
+
+  document.getElementById('keySumbit').addEventListener("click", function keySubmit() {
+    event.preventDefault();
+    var numInput = document.getElementByClassName('numInput').value;
+    if (!numInput) {
+      alert("please add a number of articles");
+    } else {
+      continue;
+    }
+    return false;
   });
   </script>
   <script src="/assets/js/jquery-1.11.2.min.js"></script>
