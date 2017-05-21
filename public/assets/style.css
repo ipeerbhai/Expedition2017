@@ -1,0 +1,24 @@
+.logoHeader {
+  width: 100%;
+  background: #cee3f8;
+  height: 120px;
+}
+.logo {
+  position: relative;
+  bottom: 10px;
+  width: 20%;
+}
+
+.searchBar {
+  position: relative;
+  top: 10px;
+  left: 30px;
+}
+
+.numInput {
+  width: 25px;
+}
+
+.keywordInput {
+  width: 500px;
+}
