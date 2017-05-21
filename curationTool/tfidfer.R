@@ -80,9 +80,9 @@ tf_idf_dist <- dist(t(tf_idf_mat), method = 'cosine')
 
 
 clust_h <- hclust(d = t(tf_idf_dist), method = 'ward.D2')
-plot(clust_h,
-     main = 'Cluster Dendrogram: Ward Cosine Distance',
-     xlab = '', ylab = '', sub = '')
+#plot(clust_h,
+#     main = 'Cluster Dendrogram: Ward Cosine Distance',
+#     xlab = '', ylab = '', sub = '')
 
 dist_mat <- as.matrix(tf_idf_dist)
 
