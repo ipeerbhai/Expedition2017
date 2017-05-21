@@ -2,86 +2,46 @@
 <html>
 
 <head>
-    <!--Favicon stuff -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="theme-color" content="#ffffff">
-    <!-- Meta -->
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--CSS-->
-    <link rel="stylesheet" href="/assets/style.css">
-    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
-    <!-- Google fonts-->
-    <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic" rel="stylesheet"
-        type="text/css" />
-    <title>FourEyes</title>
-    <script id="article-template" type="text/x-handlebars-template">
-      <section>
-        <article class="searchBar">
-          <input type="text" name="keywords" placeholder="keywords">
-          <input type="text" name="numOfArt" placeholder="1">
-          <input type="submit" value="submit">
-        </article>
-        <article>
-          {{{body}}}
-        </article>
-      </section>
-    </script>
-    <script id="description-template" type="text/x-handlebars-template">
-      <h3>Description</h3>
-      {{{body}}}
-    </script>
+  <!--Favicon stuff -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Meta -->
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--CSS-->
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
+  <!-- Google fonts-->
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic" rel="stylesheet"
+    type="text/css" />
+  <title>FourEyes</title>
 </head>
 
 <body>
   <header class="logoHeader">
-    <img class="logo" src="../img/foureyesonly.png" alt="logo">
+    <img class="logo" src="/img/foureyesonly.png" alt="logo">
   </header>
-    <article class="searchBar">
+    <form action="/v1/Search" method="POST" style="padding:10px">
       <input class="keywordInput" type="text" name="keywords" placeholder="keywords">
       <input class="numInput" type="text" name="numOfArt" placeholder="1">
       <input id="keySubmit" type="submit" value="submit">
-    </article>
-    {{{body}}}
-
-    <!-- JS-->
-    <script src="/assets/js/jquery-1.11.2.min.js"></script>
-    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/assets/js/owl.carousel.min.js"></script>
-    <script src="/assets/js/skrollr.min.js"></script>
-    <script src="/assets/js/classie.js"></script>
-    <script src="/assets/js/jquery.doubletaptogo.min.js"></script>
-    <script src="/assets/js/waypoints.min.js"></script>
-    <script src="/assets/js/jquery.countTo.js"></script>
-    <script src="/assets/js/app.min.js"></script>
-    <script type="text/javascript">
-
-    var articles = [];
-
-
-
-        $(document).ready(function () {
-
-            $("#keySubmit").click(function (e) {
-                e.preventDefault();
-
-                $.ajax({
-                  url: URl,
-                  datatype: "jsonp",
-                  success: function(data, status, xhr) {
-                    console.log(data);
-                  }
-                });
-              });
-            });
-
-    </script>
-
+    </form>
+  {{{body}}}
+  <!-- JS-->
+  <script src="/assets/js/jquery-1.11.2.min.js"></script>
+  <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/assets/js/owl.carousel.min.js"></script>
+  <script src="/assets/js/skrollr.min.js"></script>
+  <script src="/assets/js/classie.js"></script>
+  <script src="/assets/js/jquery.doubletaptogo.min.js"></script>
+  <script src="/assets/js/waypoints.min.js"></script>
+  <script src="/assets/js/jquery.countTo.js"></script>
+  <script src="/assets/js/app.min.js"></script>
 </body>
 
 </html>
