@@ -60,8 +60,8 @@ if(nrow(andArticles) > 10) {
   articles <- orArticles
 }
 
-if(nrow(articles) > 30) {
-  articles <- tail(articles, 30)
+if(nrow(articles) > 20) {
+  articles <- tail(articles, 20)
 }
   
 corpus <- Corpus(VectorSource(articles$text)) %>%
