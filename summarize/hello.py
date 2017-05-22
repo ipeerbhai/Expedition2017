@@ -15,7 +15,7 @@ articleList = json.loads(str(args[0]))
 
 #ifile = open('C:\\Users\\soth02\\Documents\\Expedition\\expedition\\Expedition2017\\data\\NYTimesArticles_woAds.csv',"r",encoding='utf8')
 
-df = pandas.read_csv('/Users/danielrb/Expedition2017/data/NYTimesArticles_woAds.csv')
+df = pandas.read_csv('data/NYTimesArticles_woAds.csv')
 
 
 masterArticles = []
